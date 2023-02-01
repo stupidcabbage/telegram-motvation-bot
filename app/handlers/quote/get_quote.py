@@ -25,7 +25,6 @@ async def get_reserve_quote() -> dict[str, str]:
     async with aiohttp.ClientSession() as session:
         async with session.get(
                 'https://favqs.com/api/qotd') as resp:
-            json_result = await resp.json()
-            json_result = json_result.get('quote')
+            json_result = (await resp.json()).get('quote')
             return {'author': json_result.get('author'),
                     'text': json_result.get('body')}
