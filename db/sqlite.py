@@ -4,7 +4,7 @@ import logging
 import sqlite3 as sl
 
 
-con = sl.connect('first.db')
+con = sl.connect('db.sqlite3')
 
 logger = logging.getLogger(__name__)
 

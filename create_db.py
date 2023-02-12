@@ -1,6 +1,6 @@
 import sqlite3 as sl
 
-con = sl.connect('first.db')
+con = sl.connect('db.sqlite3')
 
 with con:
     con.execute("""
