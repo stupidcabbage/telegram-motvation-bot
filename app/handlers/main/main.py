@@ -5,7 +5,7 @@ from aiogram.types import Message
 
 from app.templates import render_template
 from app.handlers.main_handler import send_message
-from app.texts import HELP, make_start_text
+from app.texts import make_start_text
 from db.sqlite import check_user, create_new_user
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ async def send_commands_message(message: Message) -> None:
         message (Message): User telegram message.`
     """
     await send_message(chat_id=message.chat.id,
-                       text=render_template('start.j2'))
+                       text=render_template('help.j2'))
 
 
 def register_handlers_main(dp: Dispatcher) -> None:
