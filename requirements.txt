@@ -13,7 +13,10 @@ flake8==6.0.0
 forismatic==0.1.3
 frozenlist==1.3.3
 idna==3.4
+isort==5.12.0
+Jinja2==3.1.2
 magic-filter==1.0.9
+MarkupSafe==2.1.2
 mccabe==0.7.0
 multidict==6.0.4
 pycares==4.3.0
