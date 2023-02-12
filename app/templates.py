@@ -1,9 +1,7 @@
 import re
-from pathlib import Path
+from app.config import TEMPLATES_DIR
 
 import jinja2
-
-TEMPLATES_DIR = Path(__file__).resolve().parent / 'templates'
 
 
 def render_template(template_name: str, data: dict | None = None) -> str:
