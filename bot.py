@@ -10,7 +10,7 @@ from app.commands import set_commands
 from app.services.check_time import check_the_time
 from app.handlers.quote.quote import register_handlers_quote
 from app.handlers.main.main import register_handlers_main
-from app.handlers.quote.managment import register_handlers_managment_quote
+from app.handlers.quote.register import register_handlers_managment_quote
 from config.config_reader import load_config
 
 logger = logging.getLogger(__name__)

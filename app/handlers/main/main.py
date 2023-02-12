@@ -3,8 +3,8 @@ import logging
 from aiogram import Dispatcher
 from aiogram.types import Message
 
-from app.texts import HELP, make_start_text
 from app.handlers.main_handler import send_message
+from app.texts import HELP, make_start_text
 from db.sqlite import check_user, create_new_user
 
 logger = logging.getLogger(__name__)
