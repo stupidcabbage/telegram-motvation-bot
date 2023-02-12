@@ -1,7 +1,6 @@
 import logging
 from typing import Union
 
-from aiogram import Dispatcher
 from aiogram.types import Message
 
 from app.handlers.main_handler import send_message
@@ -46,8 +45,3 @@ async def send_quote_message(chat_id: Union[str, int],
 async def parse_message(answer: dict[str, str]) -> str:
     """Парсит и формирует сообщение."""
     return f"<b>{answer.get('text')}</b> \n\n{answer.get('author')}"
-
-
-def register_handlers_quote(dp: Dispatcher) -> None:
-    """Регистрирует обработчик отправки высказываний"""
-    dp.register_message_handler(send_quote, commands='quote')

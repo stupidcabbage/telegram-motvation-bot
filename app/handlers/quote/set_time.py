@@ -1,10 +1,10 @@
-from app.handlers.main_handler import send_message
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
+
+from app.handlers.main_handler import send_message
+from app.services.validation_time import parse_message, validate_time
 from app.states.time import SetTime
 from app.texts import ERROR_SET_TIME, HAS_SETTED_TIME, SET_TIME
-
-from app.services.validation_time import parse_message, validate_time
 from db.sqlite import check_user_time_in_schedule, create_new_plan_quote
 
 
