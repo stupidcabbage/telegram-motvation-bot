@@ -20,27 +20,24 @@ async def set_time_end(message: Message, state: FSMContext) -> None:
     user_data = await state.get_data()
 
     if validate_time(user_data.get('time')):
+
         parsed_message = parse_message(user_data.get('time'))
-        if check_user_time_in_schedule(message.chat.id, parsed_message):
+        if check_user_time_in_schedule(chat_id=message.chat.id,
+                                       time=parsed_message):
             await send_message(
                 chat_id=message.chat.id,
-                text=HAS_SETTED_TIME
-            )
+                text=HAS_SETTED_TIME)
             await state.finish()
         else:
             await send_message(
                 chat_id=message.chat.id,
-                text=parsed_message
-                )
-            data = {'chat_id': message.chat.id,
-                    'time': parsed_message}
+                text=parsed_message)
 
-            create_new_plan_quote(data)
+            create_new_plan_quote(message.chat.id, parsed_message)
 
             await state.finish()
     else:
         await send_message(
             chat_id=message.chat.id,
-            text=ERROR_SET_TIME
-        )
+            text=ERROR_SET_TIME)
         await state.set_state(SetTime.waiting_for_set_time.state)

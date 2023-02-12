@@ -39,9 +39,7 @@ def check_user(chat_id: int) -> Optional[tuple]:
     return _get_request(sql)
 
 
-def create_new_plan_quote(data: dict[int, str]) -> None:
-    chat_id = data.get('chat_id')
-    time = data.get('time')
+def create_new_plan_quote(chat_id: int, time: str) -> None:
     with con:
         con.execute(f'INSERT INTO schedule (chat_id, time) \
                     VALUES({chat_id}, "{time}")')
