@@ -5,7 +5,6 @@ from app.handlers.main_handler import send_message
 from app.services.validation_time import parse_message, validate_time
 from app.states.time import SetTime
 from app.templates import render_template
-
 from db.sqlite import check_user_time_in_schedule, create_new_plan_quote
 
 

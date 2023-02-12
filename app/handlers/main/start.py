@@ -2,8 +2,8 @@ import logging
 
 from aiogram.types import Message
 
-from app.templates import render_template
 from app.handlers.main_handler import send_message
+from app.templates import render_template
 from db.sqlite import check_user, create_new_user
 
 logger = logging.getLogger(__name__)

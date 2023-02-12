@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 
-from app.handlers.main import start, help
+from app.handlers.main import help, start
 
 
 def register_handlers_main(dp: Dispatcher) -> None:

@@ -3,9 +3,9 @@ from aiogram import Dispatcher
 from app.states.time import DeleteTime, SetTime
 
 from .delete_time import delete_from_schedule, end_delete_from_schedule
+from .quote import send_quote
 from .schedule import check_schedule
 from .set_time import set_time_end, set_time_start
-from .quote import send_quote
 
 
 def register_handlers_managment_quote(dp: Dispatcher) -> None:

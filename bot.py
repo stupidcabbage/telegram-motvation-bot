@@ -11,7 +11,7 @@ from app.services.check_time import check_the_time
 from app.handlers.main.register import register_handlers_main
 from app.handlers.quote.register import (register_handlers_managment_quote,
                                          register_handlers_quote)
-from config.config_reader import load_config
+from app.config import TELEGRAM_TOKEN
 
 logger = logging.getLogger(__name__)
 
@@ -23,10 +23,8 @@ async def main() -> None:
 
     logger.error('Starting bot')
 
-    config = load_config('config/bot.ini')
-
     bot = Bot(
-        token=config.tg_bot.token,
+        token=TELEGRAM_TOKEN,
         parse_mode=types.ParseMode.HTML)
     dp = Dispatcher(bot, storage=MemoryStorage())
 

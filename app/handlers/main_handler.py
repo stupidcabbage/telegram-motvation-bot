@@ -3,14 +3,13 @@ from typing import Union
 
 from aiogram import Bot, types
 
-from config.config_reader import load_config
+from app.config import TELEGRAM_TOKEN
 
 logger = logging.getLogger(__name__)
 
-config = load_config('config/bot.ini')
 
 bot = Bot(
-    token=config.tg_bot.token,
+    token=TELEGRAM_TOKEN,
     parse_mode=types.ParseMode.HTML)
 
 

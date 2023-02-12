@@ -1,11 +1,10 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message
 
-from app.templates import render_template
-
 from app.handlers.main_handler import send_message
 from app.services.validation_time import parse_message, validate_time
 from app.states.time import DeleteTime
+from app.templates import render_template
 from db.sqlite import (check_user_time_in_schedule, delete_all_from_schedule,
                        delete_time_in_schedule)
 
