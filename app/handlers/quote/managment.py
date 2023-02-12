@@ -5,6 +5,8 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import Message
 
+from app.texts import (SET_TIME, HAS_SETTED_TIME, ERROR_SET_TIME,
+                       ERROR_DELETE_TIME, DELETE_QUESTION)
 from app.handlers.main_handler import send_message
 from app.handlers.quote.servises import parse_message, validate_time
 from db.sqlite import (check_user_schedule, create_new_plan_quote,
@@ -25,7 +27,7 @@ class DeleteTime(StatesGroup):
 async def set_time_start(message: Message, state: FSMContext) -> None:
     await send_message(
         message.chat.id,
-        'Отправьте время, в которое вам присылать цитату.')
+        SET_TIME)
     await state.set_state(SetTime.waiting_for_set_time.state)
 
 
@@ -38,7 +40,7 @@ async def set_time_end(message: Message, state: FSMContext) -> None:
         if check_user_time_in_schedule(message.chat.id, parsed_message):
             await send_message(
                 chat_id=message.chat.id,
-                text='На это время уже назначено!'
+                text=HAS_SETTED_TIME
             )
             await state.finish()
         else:
@@ -55,7 +57,7 @@ async def set_time_end(message: Message, state: FSMContext) -> None:
     else:
         await send_message(
             chat_id=message.chat.id,
-            text='Ошибка в формате отправки даты. Попробуйте отправить снова!'
+            text=ERROR_SET_TIME
         )
         await state.set_state(SetTime.waiting_for_set_time.state)
 
@@ -68,11 +70,12 @@ async def check_schedule(message: Message) -> None:
 async def delete_from_schedule(message: Message, state: FSMContext) -> None:
     await send_message(
         message.chat.id,
-        'Какое время удалить из расписания?')
+        DELETE_QUESTION)
     await state.set_state(DeleteTime.waiting_for_get_time)
 
 
-async def end_delete_from_schedule(message: Message, state: FSMContext) -> None:
+async def end_delete_from_schedule(message: Message,
+                                   state: FSMContext) -> None:
 
     await state.update_data(time=message.text.lower())
     user_data = (await state.get_data()).get('time')
@@ -83,7 +86,7 @@ async def end_delete_from_schedule(message: Message, state: FSMContext) -> None:
         if check_user_time_in_schedule(message.chat.id, parsed_message):
             await send_message(
                 chat_id=message.chat.id,
-                text=f'Удалил из расписания: {parsed_message}')
+                text=f'<b>📪 Удалил <i>{parsed_message}</i> из расписания!</b>')
 
             delete_time_in_schedule(chat_id=message.chat.id,
                                     time=parsed_message)
@@ -97,7 +100,7 @@ async def end_delete_from_schedule(message: Message, state: FSMContext) -> None:
     elif user_data in ('все', 'всё', 'all'):
         await send_message(
             chat_id=message.chat.id,
-            text='Удалил все из расписания!')
+            text=f'<b>📪 Удалил <i>{user_data}</i> из расписания!</b>')
 
         delete_all_from_schedule(message.chat.id)
         await state.finish()
@@ -105,7 +108,7 @@ async def end_delete_from_schedule(message: Message, state: FSMContext) -> None:
     else:
         await send_message(
             chat_id=message.chat.id,
-            text='Ошибка в формате отправки даты. Попробуйте отправить снова!')
+            text=ERROR_DELETE_TIME)
         await state.set_state(DeleteTime.waiting_for_get_time)
 
 
