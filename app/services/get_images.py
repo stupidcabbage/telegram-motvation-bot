@@ -9,4 +9,3 @@ async def get_image():
                 'https://api.thecatapi.com/v1/images/search') as resp:
             json_result = await resp.json()
             return json_result[0].get('url')
-

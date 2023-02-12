@@ -5,7 +5,7 @@ from aiogram import Dispatcher
 from aiogram.types import Message
 
 from app.handlers.main_handler import send_message
-from app.handlers.quote.get_quote import get_quote, get_reserve_quote
+from app.services.get_quote import get_quote, get_reserve_quote
 
 logger = logging.getLogger(__name__)
 

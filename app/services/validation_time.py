@@ -2,7 +2,7 @@ import logging
 import re as r
 from typing import Match, Optional
 
-from app.servises.check_time import parse_time
+from app.services.check_time import parse_time
 
 logger = logging.getLogger(__name__)
 

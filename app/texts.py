@@ -1,5 +1,5 @@
 import aiogram.utils.markdown as fmt
-from app.servises.get_images import get_image
+from app.services.get_images import get_image
 
 
 async def make_start_text(first_name: str) -> str:

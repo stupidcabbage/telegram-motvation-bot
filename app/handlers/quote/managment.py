@@ -2,26 +2,18 @@ import logging
 
 from aiogram import Dispatcher
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import Message
 
+from app.states.time import SetTime, DeleteTime
 from app.texts import (SET_TIME, HAS_SETTED_TIME, ERROR_SET_TIME,
                        ERROR_DELETE_TIME, DELETE_QUESTION)
 from app.handlers.main_handler import send_message
-from app.handlers.quote.servises import parse_message, validate_time
+from app.services.validation_time import parse_message, validate_time
 from db.sqlite import (check_user_schedule, create_new_plan_quote,
                        delete_time_in_schedule, delete_all_from_schedule,
                        check_user_time_in_schedule)
 
 logger = logging.getLogger(__name__)
-
-
-class SetTime(StatesGroup):
-    waiting_for_set_time = State()
-
-
-class DeleteTime(StatesGroup):
-    waiting_for_get_time = State()
 
 
 async def set_time_start(message: Message, state: FSMContext) -> None:
